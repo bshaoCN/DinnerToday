@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/Dinner/Dinner/bin/Debug/netstandard2.0
+/Dinner/Dinner/obj
+/Dinner/Dinner.Android/bin/Debug
+/Dinner/Dinner.Android/obj
