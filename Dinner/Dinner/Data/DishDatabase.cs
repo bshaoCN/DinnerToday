@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Dinner.Models;
 using SQLite;
@@ -47,7 +47,10 @@ namespace Dinner.Data
 
         internal Task<List<Dish>> GetRandomDishedAsync()
         {
-            return database.Table<Dish>().Where(i => i.ID <=2).ToListAsync();
+
+            var vegtables = database.Table<Dish>().Where(x => x.IsMeat == false).OrderBy(x => Guid.NewGuid()).Take(1).ToListAsync();
+            var meats = database.Table<Dish>().Where(x => x.IsMeat == true).OrderBy(x => Guid.NewGuid()).Take(1).ToListAsync();
+            return meats;
         }
     }
 }

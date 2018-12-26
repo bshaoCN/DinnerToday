@@ -6,11 +6,40 @@
         <ToolbarItem Clicked="OnDishSaved" Icon="save.png"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-                <Label Text="Name" />
-                <Entry Text="{Binding Name}" />
-                <Label Text="Notes" />
-                <Entry Text="{Binding Notes}" />
-        </StackLayout>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="Name" VerticalOptions="Center"/>
+            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Placeholder="Name"
+                   VerticalOptions="Center"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="Type" VerticalOptions="Center"/>
+            <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                <Switch x:Name="switch" IsToggled="False" VerticalOptions="Center"/>
+                <Label Text="Vegetable" VerticalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                             Binding="{Binding Source={x:Reference switch}, Path=IsToggled}"
+                             Value="True">
+                            <Setter Property="Text" Value="Meat" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label"
+                             Binding="{Binding Source={x:Reference switch}, Path=IsToggled}"
+                             Value="False">
+                            <Setter Property="Text" Value="Vegetable" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </StackLayout>
+            <Label Grid.Row="2" Grid.Column="0" Text="Notes" VerticalOptions="Center"/>
+            <Entry  Grid.Row="2" Grid.Column="1" Text="{Binding Notes}" Placeholder="Notes"
+                    VerticalOptions="Center"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

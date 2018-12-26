@@ -10,18 +10,19 @@ using Xamarin.Forms.Xaml;
 
 namespace Dinner.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DishPage : ContentPage
-	{
-		public DishPage ()
-		{
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DishPage : ContentPage
+    {
+        public DishPage()
+        {
+            InitializeComponent();
+        }
 
         private async void OnDishSaved(object sender, EventArgs e)
         {
-            var todoItem = (Dish)BindingContext;
-            await App.DishDatabase.SaveDishAsync(todoItem);
+            var dish = (Dish)BindingContext;
+            dish.IsMeat = @switch.IsToggled;
+            await App.DishDatabase.SaveDishAsync(dish);
             await Navigation.PopAsync();
         }
     }
